@@ -21,11 +21,11 @@ const GameController = (() => {
 
     let gameOver = false;
     let winner;
-    const winningCombinations = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+    const winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[2,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
     const checkForWin = (gameBoard) => {
         winningCombinations.forEach((combination) => {
-            if (gameBoard[combination[0]] === board[combination[1]] === board[combination[2]]) {
+            if (gameBoard[combination[0]] === gameBoard[combination[1]] &&  gameBoard[combination[1]] === gameBoard[combination[2]]) {
                 gameOver = true;
                 winner = activePlayer;
             }
