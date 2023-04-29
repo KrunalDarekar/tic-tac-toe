@@ -5,22 +5,21 @@
 }
 
 body {
-    background-color: #AFD3E2;
+    background-color: #F6F1F1;
 }
 
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    min-width: 30rem;
-    min-height: 30rem;
-    margin: 1rem;
+    width: 30rem;
+    height: 30rem;
 }
 
 header {
     text-align: center;
-    background-color: #F6F1F1;
+    background-color: #146C94;
     padding: 2rem;
-    color: #146C94;
+    color: #F6F1F1;
 }
 
 .main {
@@ -30,8 +29,9 @@ header {
 }
 
 .top-message {
-    margin: 1rem;
+    margin: 2rem;
     font-size: 1.5rem;
+    color: #146C94;
 }
 
 .container > button {
