@@ -18,36 +18,30 @@ const Player = (name, token) => {
     return { getToken, getName};
 };
 
-const GameController = (() => {
+const gameController = (() => {
     const board = gameBoard.getBoard();
     const player1 = Player("player X", "X");
     const player2 = Player("player O", "O");
 
     let activePlayer = player1;
 
-    let gameOver = false;
-    let winner;
-    const winningCombinations = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
-
-    const checkForWin = (gameBoard) => {
-        winningCombinations.forEach((combination) => {
-            if (gameBoard[combination[0]] === board[combination[1]] === board[combination[2]]) {
-                gameOver = true;
-                winner = activePlayer;
-            }
-        })
-    }
-
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === player1 ? player2 : player1;
     }
     const getActivePlayer = () => activePlayer;
 
-    const getWinner = () => winner;
+    const playRound = (index) => {
+        gameBoard.addMark(activePlayer, index);
 
-    const getGameStatus = () => gameOver;
+        // game-logic
 
-    return { getActivePlayer, switchPlayerTurn, checkForWin, getWinner, getGameStatus};
+        switchPlayerTurn();
+
+    }
+
+    const getCurrentBoard = () => board;
+
+    return { getActivePlayer, switchPlayerTurn, getCurrentBoard};
 })();
 
 const DisplayController = (() => {
