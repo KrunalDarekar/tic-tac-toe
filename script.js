@@ -4,7 +4,6 @@ const gameBoard = (() => {
     const getBoard = () => board;
 
     const addMark = (player, index) => {
-        if (board[index]) return;
         board[index] = player.getToken();
     }
     
@@ -31,6 +30,7 @@ const gameController = (() => {
     const getActivePlayer = () => activePlayer;
 
     const playRound = (index) => {
+        if (board[index]) return;
         gameBoard.addMark(activePlayer, index);
 
         // game-logic
