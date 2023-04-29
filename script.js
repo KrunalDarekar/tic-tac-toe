@@ -8,17 +8,18 @@ const gameBoard = (() => {
         board[index] = player.getToken();
     }
     
-    return {getBoard, addMark};
+    return { getBoard, addMark};
 })();
 
 const Player = (name, token) => {
     const getToken = () => token;
     const getName = () => name;
-    return {getToken, getName};
+
+    return { getToken, getName};
 };
 
 const GameController = (() => {
-    const board = GameBoard.getBoard();
+    const board = gameBoard.getBoard();
     const player1 = Player("player X", "X");
     const player2 = Player("player O", "O");
 
