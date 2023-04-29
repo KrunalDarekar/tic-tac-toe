@@ -1,6 +1,47 @@
+* {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #AFD3E2;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    max-width: 30rem;
+    min-width: 30rem;
     min-height: 30rem;
+    margin: 1rem;
+}
+
+header {
+    text-align: center;
+    background-color: #F6F1F1;
+    padding: 2rem;
+    color: #146C94;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-message {
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.container > button {
+    font-size: 2rem;
+}
+
+.X {
+    color: rgb(243, 76, 76);
+}
+
+.O {
+    color: #146C94
 }

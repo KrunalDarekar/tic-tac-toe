@@ -99,6 +99,7 @@ const displayController = (() => {
             const cellButton = document.createElement("button");
             cellButton.innerHTML = `${board[index]}`
             cellButton.classList.add("cell");
+            if (board[index]) cellButton.classList.add(`${board[index]}`);
             cellButton.dataset.index = index;
             boardContainer.appendChild(cellButton);
             index += 1;
