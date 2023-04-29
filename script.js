@@ -36,30 +36,29 @@ const gameController = (() => {
         // game-logic
 
         switchPlayerTurn();
-
     }
 
     const getCurrentBoard = () => board;
 
-    return { getActivePlayer, switchPlayerTurn, getCurrentBoard};
+    return { getActivePlayer, playRound, getCurrentBoard};
 })();
 
-const DisplayController = (() => {
-    const board = GameBoard.getBoard();
+const displayController = (() => {
+    const board = gameController.getCurrentBoard();
     const boardContainer = document.querySelector(".container");
     const topMessage = document.querySelector(".top-message");
 
     const displayPlayerTurn = () => {
-        const player = GameController.getActivePlayer();
+        const player = gameController.getActivePlayer();
         topMessage.innerHTML = `${player.getName()}'s turn`;
     }
 
-    const displayWinner = () => {
-        const winner = GameController.getWinner();
+    const displayGameOverMessage = () => {
+        const winner = gameController.getActivePlayer();
         topMessage.innerHTML = `${winner.getName()} is the winner`;
     }
 
-    const displayBoard = () => {
+    const updateDisplay = () => {
         boardContainer.textContent = "";
         displayPlayerTurn();
         let index = 0;
@@ -68,21 +67,22 @@ const DisplayController = (() => {
             cellButton.innerHTML = `${board[index]}`
             cellButton.classList.add("cell");
             cellButton.dataset.index = index;
-            cellButton.addEventListener("click", () => {
-                GameController.addMark(GameController.getActivePlayer(), parseInt(cellButton.dataset.index, 10))
-                GameController.checkForWin(board);
-                if (GameController.getGameStatus()) {
-                    displayWinner();
-                }
-                GameController.switchPlayerTurn();
-                displayBoard();
-            })
             boardContainer.appendChild(cellButton);
             index += 1;
         });
     }
 
-    return {displayBoard};
+    function clickHandlerBoard(e) {
+        const selectedCellIndex = e.target.dataset.index;
+        if(!selectedCellIndex) return;
+
+        gameController.playRound(selectedCellIndex);
+        updateDisplay();
+    }
+
+    boardContainer.addEventListener("click", clickHandlerBoard);
+
+    return { updateDisplay};
 })();
 
-DisplayController.displayBoard();
+displayController.updateDisplay();
