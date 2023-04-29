@@ -29,18 +29,38 @@ const gameController = (() => {
     }
     const getActivePlayer = () => activePlayer;
 
+    let gameResult = "";
+    let isOver = false;
+    const winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+    const checkForGameOver = (index) => {
+        winningCombinations.forEach( (combination) => {
+            if (board[combination[0]] === board[combination[1]] && board[combination[2]] === board[combination[1]]) {
+                gameResult = `${activePlayer.getName()} is the winner`;
+                isOver = true;
+                
+            }
+        })
+        
+        if (index === 8 && !gameResult) {
+            gameResult = "It's a tie";
+        }
+    }
+
+    const getGameResult = () => gameResult;
+    const getGameIsOver = () => isOver;
+    
     const playRound = (index) => {
         if (board[index]) return;
         gameBoard.addMark(activePlayer, index);
 
-        // game-logic
+        checkForGameOver(index);
 
         switchPlayerTurn();
     }
 
     const getCurrentBoard = () => board;
 
-    return { getActivePlayer, playRound, getCurrentBoard};
+    return { getActivePlayer, playRound, getCurrentBoard, getGameIsOver, getGameResult};
 })();
 
 const displayController = (() => {
