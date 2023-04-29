@@ -34,15 +34,24 @@ const gameController = (() => {
     const winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     const checkForGameOver = (index) => {
         winningCombinations.forEach( (combination) => {
-            if (board[combination[0]] === board[combination[1]] && board[combination[2]] === board[combination[1]]) {
+            if (board[combination[0]] && board[combination[0]] === board[combination[1]] && board[combination[2]] === board[combination[1]]) {
                 gameResult = `${activePlayer.getName()} is the winner`;
                 isOver = true;
                 
             }
         })
         
-        if (index === 8 && !gameResult) {
-            gameResult = "It's a tie";
+        if (!gameResult) {
+            let count = 0;
+            board.forEach( (cellValue) => {
+                if (cellValue) {
+                    count += 1;
+                }
+            });
+            if (count === 9) {
+                isOver = true;
+                gameResult = "It's a tie";
+            }
         }
     }
 
@@ -74,13 +83,17 @@ const displayController = (() => {
     }
 
     const displayGameOverMessage = () => {
-        const winner = gameController.getActivePlayer();
-        topMessage.innerHTML = `${winner.getName()} is the winner`;
+        const message = gameController.getGameResult();
+        topMessage.innerHTML = `${message}`;
     }
 
     const updateDisplay = () => {
+        if (gameController.getGameIsOver()){
+            displayGameOverMessage();
+        } else {
+            displayPlayerTurn();
+        }
         boardContainer.textContent = "";
-        displayPlayerTurn();
         let index = 0;
         board.forEach( () => {
             const cellButton = document.createElement("button");
