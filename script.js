@@ -106,8 +106,9 @@ const displayController = (() => {
     }
 
     function clickHandlerBoard(e) {
+        if (gameController.getGameIsOver()) return;
         const selectedCellIndex = e.target.dataset.index;
-        if(!selectedCellIndex) return;
+        if (!selectedCellIndex) return;
 
         gameController.playRound(selectedCellIndex);
         updateDisplay();
