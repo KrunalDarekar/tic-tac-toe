@@ -119,7 +119,7 @@ const displayController = (() => {
     boardContainer.addEventListener("click", clickHandlerBoard);
 
     function clickHandlerRestart() {
-        location.reload();
+        window.location.reload();
     }
 
     restartButton.addEventListener("click", clickHandlerRestart);
