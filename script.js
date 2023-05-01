@@ -76,6 +76,7 @@ const displayController = (() => {
     const board = gameController.getCurrentBoard();
     const boardContainer = document.querySelector(".container");
     const topMessage = document.querySelector(".top-message");
+    const restartButton = document.querySelector(".restart");
 
     const displayPlayerTurn = () => {
         const player = gameController.getActivePlayer();
@@ -116,6 +117,12 @@ const displayController = (() => {
     }
 
     boardContainer.addEventListener("click", clickHandlerBoard);
+
+    function clickHandlerRestart() {
+        location.reload();
+    }
+
+    restartButton.addEventListener("click", clickHandlerRestart);
 
     return { updateDisplay};
 })();

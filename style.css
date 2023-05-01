@@ -30,7 +30,7 @@ header {
 }
 
 .top-message {
-    margin: 2rem;
+    margin: 1.5rem;
     font-size: 1.5rem;
     color: #146C94;
 }
@@ -45,4 +45,19 @@ header {
 
 .O {
     color: #146C94
+}
+
+.main > .restart {
+    padding: 0.3rem 2rem;
+    margin-top: 1rem;
+    background-color: #146C94;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+    color: #F6F1F1;
+}
+
+.main > .restart:hover {
+    background-color: #385a69;
+    cursor: pointer;
 }
